@@ -2,3 +2,4 @@
 
 export(clean_colnames)
 export(init_project)
+export(write_rasa_nlu)

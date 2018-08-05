@@ -1,6 +1,6 @@
 Package: brock
 Title: A package to centralize the helper functions that make my day easier
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: person("Brock", "Tibert", email = "btibert3@gmail.com", role = c("aut", "cre"))
 Description: Loads a number of helper functions that make data munging easier for my mental model
 Depends: R (>= 3.4.4)
