@@ -12,5 +12,6 @@ Imports:
     lubridate,
     dplyr,
     tidyr,
-    purrr
+    purrr,
+    jsonlite
 RoxygenNote: 6.0.1
