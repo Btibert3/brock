@@ -29,6 +29,9 @@ sports_parse_pbp(gid='2019020010') {
   plays = events$liveData$plays$allPlays
   plays2 = jsonlite::flatten(plays)
 
+  ## LEFT OFF HERE:  players is the only col that seems to fail
+  ## borrow from:
+
   # extract players to flatten
   players = plays2$players
   plays2$players = NULL
