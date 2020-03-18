@@ -28,18 +28,19 @@ sports_parse_pbp(gid='2019020010') {
   # filter down to the plays
   plays = events$liveData$plays$allPlays
   plays2 = jsonlite::flatten(plays)
+  plays2$gid = gid
 
-  ## LEFT OFF HERE:  players is the only col that seems to fail
-  ## borrow from:
+  # for each row, flatten the players
+  # and return a dataframe to cbind onto plays2
 
-  # extract players to flatten
-  players = plays2$players
-  plays2$players = NULL
+
 
   # for each entry, if players, for player in , 1 row dataframe
-  flatten_players = function(x) {
+  flatten_players = function(x, gid) {
+    # if nothing, just return a dataframe
     if (length(x) == 0) {
       return(data.frame)
+    }
   }
 
   # alskdjf
