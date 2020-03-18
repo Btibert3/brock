@@ -6,15 +6,15 @@
 #' @examples
 #' nhl_parse_pbp()
 
+fail_function = function() {
+  return(data.frame())
+}
 
 sports_parse_pbp(gid='2019020010') {
   # url
   URL = 'http://statsapi.web.nhl.com/api/v1/game/%s/feed/live'
   URL = sprintf(URL, gid)
   # fail function
-  fail_function = function() {
-    return(data.frame())
-  }
   # get the pbp data for the gid
   events = jsonlite::fromJSON(URL)
   # fail gracefully as a dataframe
@@ -28,35 +28,39 @@ sports_parse_pbp(gid='2019020010') {
   # filter down to the plays
   plays = events$liveData$plays$allPlays
   plays2 = jsonlite::flatten(plays)
-  plays2$gid = gid
 
-  # for each row, flatten the players
-  # and return a dataframe to cbind onto plays2
-
-
-
-  # for each entry, if players, for player in , 1 row dataframe
-  flatten_players = function(x, gid) {
-    # if nothing, just return a dataframe
-    if (length(x) == 0) {
-      return(data.frame)
+  # extract the players and build a dataframe with a row for each play
+  players_parsed = data.frame()
+  for (i in 1:nrow(plays2)) {
+    tmp = plays2[i, "players"][[1]]
+    if (length(tmp) == 0) {
+      players_parsed = dplyr::bind_rows(players_parsed, data.frame(gid=gid))
+    } else {
+    tmp_players = data.frame(gid = gid)
+    for (i in 1:nrow(tmp)) {
+      p = jsonlite::flatten(tmp[i, ])
+      colnames(p) = paste0(colnames(p), "_", i)
+      tmp_players = cbind(tmp_players, p)
     }
+    players_parsed = dplyr::bind_rows(players_parsed, tmp_players)
+    }
+    # cleanup
+    rm(tmp, tmp_players, p)
   }
 
-  # alskdjf
-
-
-
-  }
   # add to plays2
+  plays2$players = NULL
+  players_parsed$gid = NULL
+  plays3 = cbind(plays2, players_parsed)
+
   # clean . in names with _
+  colnames(plays3) = gsub("\\.", "_", colnames(plays3))
 
-  # iterate over each
-
-  # --------- result
-  test = 'result'
-
-
-
+  # return the parsed data
+  return(plays3)
 
 }
+
+
+
+
