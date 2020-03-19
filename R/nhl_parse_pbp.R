@@ -10,7 +10,8 @@ fail_function = function() {
   return(data.frame())
 }
 
-sports_parse_pbp(gid='2019020010') {
+
+sports_parse_pbp = function(gid='2019020010') {
   # url
   URL = 'http://statsapi.web.nhl.com/api/v1/game/%s/feed/live'
   URL = sprintf(URL, gid)
@@ -64,3 +65,7 @@ sports_parse_pbp(gid='2019020010') {
 
 
 
+## test cases
+# test_parse = sports_parse_pbp()
+# class(test_parse) == 'data.frame'
+# nrow(test_parse) > 0
