@@ -2,4 +2,5 @@
 
 export(clean_colnames)
 export(init_project)
+export(nhl_parse_pbp)
 export(write_rasa_nlu)

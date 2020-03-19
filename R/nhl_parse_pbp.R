@@ -6,12 +6,7 @@
 #' @examples
 #' nhl_parse_pbp()
 
-fail_function = function() {
-  return(data.frame())
-}
-
-
-sports_parse_pbp = function(gid='2019020010') {
+nhl_parse_pbp = function(gid='2019020010') {
   # url
   URL = 'http://statsapi.web.nhl.com/api/v1/game/%s/feed/live'
   URL = sprintf(URL, gid)
@@ -37,13 +32,13 @@ sports_parse_pbp = function(gid='2019020010') {
     if (length(tmp) == 0) {
       players_parsed = dplyr::bind_rows(players_parsed, data.frame(gid=gid))
     } else {
-    tmp_players = data.frame(gid = gid)
-    for (i in 1:nrow(tmp)) {
-      p = jsonlite::flatten(tmp[i, ])
-      colnames(p) = paste0(colnames(p), "_", i)
-      tmp_players = cbind(tmp_players, p)
-    }
-    players_parsed = dplyr::bind_rows(players_parsed, tmp_players)
+      tmp_players = data.frame(gid = gid)
+      for (i in 1:nrow(tmp)) {
+        p = jsonlite::flatten(tmp[i, ])
+        colnames(p) = paste0(colnames(p), "_", i)
+        tmp_players = cbind(tmp_players, p)
+      }
+      players_parsed = dplyr::bind_rows(players_parsed, tmp_players)
     }
     # cleanup
     rm(tmp, tmp_players, p)
@@ -61,6 +56,15 @@ sports_parse_pbp = function(gid='2019020010') {
   return(plays3)
 
 }
+
+
+
+fail_function = function() {
+  return(data.frame())
+}
+
+
+
 
 
 

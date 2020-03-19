@@ -2,7 +2,6 @@
 % Please edit documentation in R/as_date.R, R/clean_colnames.R
 \name{clean_colnames}
 \alias{clean_colnames}
-\alias{clean_colnames}
 \title{Convert a timestamp to a date in a timezone defined}
 \usage{
 clean_colnames(df, ws_char = NA, to_lower = TRUE)
