@@ -6,12 +6,7 @@
 #' @examples
 #' nhl_parse_pbp()
 
-fail_function = function() {
-  return(data.frame())
-}
-
-
-sports_parse_pbp = function(gid='2019020010') {
+nhl_parse_pbp = function(gid='2019020010') {
   # url
   URL = 'http://statsapi.web.nhl.com/api/v1/game/%s/feed/live'
   URL = sprintf(URL, gid)
@@ -46,7 +41,7 @@ sports_parse_pbp = function(gid='2019020010') {
     players_parsed = dplyr::bind_rows(players_parsed, tmp_players)
     }
     # cleanup
-    rm(tmp, tmp_players, p)
+    # rm(tmp, tmp_players, p)
   }
 
   # add to plays2
@@ -62,6 +57,9 @@ sports_parse_pbp = function(gid='2019020010') {
 
 }
 
+fail_function = function() {
+  return(data.frame())
+}
 
 
 
