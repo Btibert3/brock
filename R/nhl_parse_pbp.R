@@ -62,9 +62,6 @@ fail_function = function() {
 }
 
 
-fail_function = function() {
-  return(data.frame())
-}
 
 
 
