@@ -32,13 +32,13 @@ nhl_parse_pbp = function(gid='2019020010') {
     if (length(tmp) == 0) {
       players_parsed = dplyr::bind_rows(players_parsed, data.frame(gid=gid))
     } else {
-    tmp_players = data.frame(gid = gid)
-    for (i in 1:nrow(tmp)) {
-      p = jsonlite::flatten(tmp[i, ])
-      colnames(p) = paste0(colnames(p), "_", i)
-      tmp_players = cbind(tmp_players, p)
-    }
-    players_parsed = dplyr::bind_rows(players_parsed, tmp_players)
+      tmp_players = data.frame(gid = gid)
+      for (i in 1:nrow(tmp)) {
+        p = jsonlite::flatten(tmp[i, ])
+        colnames(p) = paste0(colnames(p), "_", i)
+        tmp_players = cbind(tmp_players, p)
+      }
+      players_parsed = dplyr::bind_rows(players_parsed, tmp_players)
     }
     # cleanup
     # rm(tmp, tmp_players, p)
@@ -60,6 +60,15 @@ nhl_parse_pbp = function(gid='2019020010') {
 fail_function = function() {
   return(data.frame())
 }
+
+
+fail_function = function() {
+  return(data.frame())
+}
+
+
+
+
 
 
 
